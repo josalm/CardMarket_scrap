@@ -28,6 +28,7 @@ Run\
 \
 \
 What's missing:\
+    - All deck formats\
     - User input\
     - More dynamic(deck choice based on dir content)\
     - Check if card that a user sells have a good price according to the avg?\
