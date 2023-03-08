@@ -4,8 +4,6 @@ from bs4 import BeautifulSoup
 Hit_Int = 0
 count = 0
 
-Url = 'https://www.cardmarket.com/en/Magic/Users/'
-
 f = open('Decks/chaos-budget.txt','r')
 for line in f:
     lineSplitted = line.split('1')
