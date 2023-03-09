@@ -11,6 +11,15 @@ root.withdraw()
 
 file_path = filedialog.askopenfilename()
 
+print('1) Search Commander Deck')
+print('2) Search Normal Deck')
+#print('3) Search Commander Deck')
+
+Choice = int(input())
+if Choice == 1 or Choice == 2:
+    print('Insert CardMarket user: ')
+    UserName = input()  #Username example: CardsCentral, voodoo-pt
+
 f = open(file_path,'r')
 for line in f:
     if line == '\n':
@@ -27,8 +36,8 @@ for line in f:
         else:
             finalCard = finalCard + '+' + cardSplitted[i]
         i += 1
-    #TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/voodoo-pt/Offers/Singles?name=' + finalCard
-    TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/CardsCentral/Offers/Singles?name=' + finalCard
+        
+    TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/' + UserName + '/Offers/Singles?name=' + finalCard
 
     page = requests.get(TotalUrl)
 

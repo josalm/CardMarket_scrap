@@ -2,7 +2,8 @@
 
 Módulos Python:\
     - beautifulSoup4 (pip install beautifulsoup4)\
-    - requests (pip install requests)
+    - requests (pip install requests)\
+    - tkinter (pip install tkinter)
 
 Web scrapping app that let's the user check if a given username in CardMarket site have the required cards of a given deck. Made for Commander decks.
 
@@ -16,14 +17,11 @@ Example:\
 1 Blasphemous Act\
 1 Burning Earth
 
-Save the file under Decks dir.
-
-In main change the following stuff:\
-    f = open('Decks/[Deck name].txt','r')\
-    TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/[CardMarket user]/Offers/Singles?name=' + finalCard
-
 Run\
 \
+Update:\
+    - Dynamic deck search. No longer need to have a Deck folder in project\
+    - User IO. No longer need to change code to assing username or deck path
 \
 What's missing:\
     - All deck formats\
