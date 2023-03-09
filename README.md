@@ -16,8 +16,6 @@ Example:\
 1 Blasphemous Act\
 1 Burning Earth
 
-Last line souldn't be an empty line.
-
 Save the file under Decks dir.
 
 In main change the following stuff:\
