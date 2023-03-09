@@ -5,6 +5,8 @@ from tkinter import filedialog
 
 Hit_Int = 0
 count = 0
+TotalPrice = 0
+DecimalPrice = 0
 
 root = tk.Tk()
 root.withdraw()
@@ -51,12 +53,16 @@ for line in f:
     if Hit_Int >= 1:
         Price = soup.find("span", {"class": "font-weight-bold color-primary small text-right text-nowrap"})
         Price_content = Price.contents[0]
+        PriceContentString = Price_content.split(' ')[0]
+        PriceContentString = PriceContentString.replace(',','.')
+        TotalPrice += float(PriceContentString)
         print(card + ' ' + Price_content + ' ' + TotalUrl)
         count += 1
 
     Hit_Int = 0
 
 print('Total Cartas: ' + str(count))
+print('Preço total: ' + str(TotalPrice) + '€')
     
 
 

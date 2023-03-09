@@ -21,13 +21,13 @@ Run\
 \
 Update:\
     - Dynamic deck search. No longer need to have a Deck folder in project\
-    - User IO. No longer need to change code to assing username or deck path
+    - User IO. No longer need to change code to assing username or deck path\
+    - Total price sum of search
+\
+\
 \
 What's missing:\
     - All deck formats\
-    - User input\
-    - More dynamic(deck choice based on dir content)\
     - Check if card that a user sells have a good price according to the avg?\
-    - Total price sum of search\
     - Excel output ??\
     - Some sort of UI for programming muggles
