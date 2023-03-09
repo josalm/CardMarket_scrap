@@ -1,11 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
+import tkinter as tk
+from tkinter import filedialog
 
 Hit_Int = 0
 count = 0
 
-f = open('Decks/chaos-budget.txt','r')
+root = tk.Tk()
+root.withdraw()
+
+file_path = filedialog.askopenfilename()
+
+f = open(file_path,'r')
 for line in f:
+    if line == '\n':
+        break
     lineSplitted = line.split('1')
     card = lineSplitted[1].split('\\n')[0]
     card = card[1:int(len(card) - 1)]
@@ -18,7 +27,8 @@ for line in f:
         else:
             finalCard = finalCard + '+' + cardSplitted[i]
         i += 1
-    TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/voodoo-pt/Offers/Singles?name=' + finalCard
+    #TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/voodoo-pt/Offers/Singles?name=' + finalCard
+    TotalUrl = 'https://www.cardmarket.com/en/Magic/Users/CardsCentral/Offers/Singles?name=' + finalCard
 
     page = requests.get(TotalUrl)
 
