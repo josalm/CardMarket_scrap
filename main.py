@@ -14,7 +14,7 @@ root.withdraw()
 file_path = filedialog.askopenfilename()
 
 print('1) Search Commander Deck')
-print('2) Search Normal Deck')
+print('2) Search Normal Deck - not implemented')
 #print('3) Search Commander Deck')
 
 Choice = int(input())
