@@ -55,7 +55,7 @@ for line in f:
         Hit = Hits.contents[0]
         Hit_Int = int(Hit)
 
-    if Hit_Int >= 1:
+    if Hit_Int >= 1 :
         Price = soup.find("span", {"class": "font-weight-bold color-primary small text-right text-nowrap"})
         Price_content = Price.contents[0]
         PriceContentString = Price_content.split(' ')[0]
