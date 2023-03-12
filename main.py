@@ -64,11 +64,20 @@ for line in f:
         if not LowestPriceCheck:
             print(card + ' ' + Price_content + ' ' + TotalUrl)
         else:
-            PriceCheckUrl = 'https://www.cardmarket.com/en/Magic/Products/Search?idCategory=0&idExpansion=0&searchString=' + card +'&idRarity=0&sortBy=price_asc&perSite=30'
+            PriceCheckUrl = 'https://www.cardmarket.com/en/Magic/Products/Search?idCategory=0&idExpansion=0&searchString=' + finalCard +'&idRarity=0&sortBy=price_asc&perSite=30'
             page = requests.get(PriceCheckUrl)
             soup = BeautifulSoup(page.content, "html.parser")
             
-            LowestPrice = soup.find("div", {"id": "productRow364044"})
+            PricesTable = soup.find("div", {"class": "table-body"})
+            PricesTableContent = PricesTable.contents[0]
+            if not (len(PricesTableContent.contents) == 3) : #Case there's only one expansion
+                LowestContent = PricesTableContent.contents[5]
+                LowestPrice = LowestContent.contents[0]
+            else:
+                PricesTable = soup.find("div", {"class": "table-body"})
+                PricesTableContent = PricesTable.contents[0]
+                LowestPrice = PricesTableContent.contents[2].next.contents[0].contents[0].contents[0].contents[0]
+
             print('Card: ' + card + '| User Price:  ' + Price_content + '| Lowest Price: ' + LowestPrice + '| Url: ' + TotalUrl)
             
             
