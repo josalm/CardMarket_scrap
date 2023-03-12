@@ -7,6 +7,7 @@ Hit_Int = 0
 count = 0
 TotalPrice = 0
 DecimalPrice = 0
+LowestPriceCheck = False
 
 root = tk.Tk()
 root.withdraw()
@@ -14,13 +15,17 @@ root.withdraw()
 file_path = filedialog.askopenfilename()
 
 print('1) Search Commander Deck')
-print('2) Search Normal Deck - not implemented')
+print('2) Search Commander Deck with lowest price check')
+print('3) Search Normal Deck - not implemented')
 #print('3) Search Commander Deck')
 
 Choice = int(input())
 if Choice == 1 or Choice == 2:
     print('Insert CardMarket user: ')
     UserName = input()  #Username example: CardsCentral, voodoo-pt
+
+if Choice == 2:
+    LowestPriceCheck = True
 
 f = open(file_path,'r')
 for line in f:
@@ -50,13 +55,32 @@ for line in f:
         Hit = Hits.contents[0]
         Hit_Int = int(Hit)
 
-    if Hit_Int >= 1:
+    if Hit_Int >= 1 :
         Price = soup.find("span", {"class": "font-weight-bold color-primary small text-right text-nowrap"})
         Price_content = Price.contents[0]
         PriceContentString = Price_content.split(' ')[0]
         PriceContentString = PriceContentString.replace(',','.')
         TotalPrice += float(PriceContentString)
-        print(card + ' ' + Price_content + ' ' + TotalUrl)
+        if not LowestPriceCheck:
+            print(card + ' ' + Price_content + ' ' + TotalUrl)
+        else:
+            PriceCheckUrl = 'https://www.cardmarket.com/en/Magic/Products/Search?idCategory=0&idExpansion=0&searchString=' + finalCard +'&idRarity=0&sortBy=price_asc&perSite=30'
+            page = requests.get(PriceCheckUrl)
+            soup = BeautifulSoup(page.content, "html.parser")
+            
+            PricesTable = soup.find("div", {"class": "table-body"})
+            PricesTableContent = PricesTable.contents[0]
+            if not (len(PricesTableContent.contents) == 3) : #Case there's only one expansion
+                LowestContent = PricesTableContent.contents[5]
+                LowestPrice = LowestContent.contents[0]
+            else:
+                PricesTable = soup.find("div", {"class": "table-body"})
+                PricesTableContent = PricesTable.contents[0]
+                LowestPrice = PricesTableContent.contents[2].next.contents[0].contents[0].contents[0].contents[0]
+
+            print('Card: ' + card + '| User Price:  ' + Price_content + '| Lowest Price: ' + LowestPrice + '| Url: ' + TotalUrl)
+            
+            
         count += 1
 
     Hit_Int = 0
